@@ -191,7 +191,7 @@ def polyCap():
         line=""
         for column in range(1,dimension+1):
             if piece[(row-1)*dimension+column]==1:
-                line = line + "■"+" "
+                line = line + "■" + " "
             else:
                 line = line + " " + " "
         return line + "  |   "
