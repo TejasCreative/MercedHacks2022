@@ -182,7 +182,7 @@ def polyCap():
         line=""
         for column in range(1,dimension+1):
             if piece[(row-1)*dimension+column]==1:
-                line = line + "■" + " "
+                line = line + "■"+" "
             else:
                 line = line + " " + " "
         return line + "  |   "
@@ -257,7 +257,7 @@ def polyCap():
         pieces = tuple(l)
         current = combinePieces(box[0],box[0])
         moves =0
-        while not current[0]==box[0]:
+        while (not current[0]==box[0]) and (moves < 2**dimension):
             os.system("cls")
             print("Enter the numbers whose pieces do not overlap to fill a 3X3 grid.")
             print("Current")
@@ -281,8 +281,8 @@ def polyCap():
         os.system("cls")
         drawpieces(current)
         drawpieces(pieces)
-        print("You solved it in", moves, "moves")
-        if moves<2**dimension:
+        if moves<2**dimension:  
+            print("You solved it in", moves, "moves")
             print("This is normal for a human!")
             time.sleep(2)
             return True
