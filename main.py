@@ -1,8 +1,10 @@
-from random import *
+from random import shuffle
+from random import randint
 import os
 import time
 import select
 import random
+
 
 #===============Variables===============
 
