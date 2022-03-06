@@ -17,6 +17,7 @@ fails = 0
 
 #===============Functions (Code for the Captchas!)===============
 
+#COLOR CAPTCHA CODE
 def colorCap():
     def colored(r, g, b, text):
         return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
@@ -143,6 +144,7 @@ def colorCap():
         else:
             return False
 
+#RANDOM LETTER CAPTCHA CODE
 def randoCap():
     def dont():
         array=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -176,7 +178,8 @@ def randoCap():
         #         return False
     return dont()
 
-def polyCap():
+#BoXor CAPTCHA CODE
+def BoXORCap():
     dimension=3
     def eachrow(piece, row):
         line=""
@@ -239,7 +242,7 @@ def polyCap():
                             piece[i]=0
                 pieces.append(piece)
             return tuple(pieces)
-    def polyominoes():
+    def BoXOR():
         box = generatePieces(1, filled = True)
         keepgenerating = True
         print("Generating Puzzle...")
@@ -257,7 +260,7 @@ def polyCap():
         pieces = tuple(l)
         current = combinePieces(box[0],box[0])
         moves =0
-        while not current[0]==box[0]:
+        while (not current[0]==box[0]) and (moves < 2**dimension):
             os.system("cls")
             print("Enter the numbers whose pieces do not overlap to fill a 3X3 grid.")
             print("Current")
@@ -281,8 +284,8 @@ def polyCap():
         os.system("cls")
         drawpieces(current)
         drawpieces(pieces)
-        print("You solved it in", moves, "moves")
         if moves<2**dimension:
+            print("You solved it in", moves, "moves!")
             print("This is normal for a human!")
             time.sleep(2)
             return True
@@ -290,8 +293,11 @@ def polyCap():
             print("TOO MANY MOVES")
             time.sleep(2)
             return False
-    return polyominoes()
+    return BoXOR()
 
+#MISC Code for letting the demo function (AND THE FRAMEWORK)
+
+#Printing the demo intro
 def prIntro():
     os.system("cls")
     print("___________________________________")
@@ -305,6 +311,7 @@ def prIntro():
     print("|                                 |")
     print("|_________________________________|")
 
+#Printing a failure for a Captcha
 def printFail():
     global tryText
     os.system("color 04")
@@ -336,6 +343,7 @@ def printFail():
             time.sleep(1)
     tryText = "Let's try that again, shall we?"
 
+#Printing that you're not a bot!
 def printSuccess():
     os.system("color 02")
     success = ["S","U","C","C","E","S","S","!"]
@@ -372,6 +380,7 @@ def printSuccess():
     time.sleep(1)
     os.system("color 07")
 
+#Printing that, without a singular doubt, you HAVE to be a robot. Definitely. For sure.
 def detectBot():
     os.system("cls")
     os.system("color 0E")
@@ -413,7 +422,7 @@ while not passing:
         if(randoCap()):
             passing = True
     else:
-        if(polyCap()):
+        if(BoXORCap()):
             passing = True
     if not passing:
         printFail()
