@@ -25,16 +25,13 @@ def colorCap():
     random_number = random.randint(0,16777215)
     hex_number1 =format(random_number,'x')
 
-
     base_url_hex = "https://www.thecolorapi.com/id?hex="
 
     base_url_rgb = "https://www.thecolorapi.com/id?rgb="
 
     first_url_hex = base_url_hex + hex_number1
 
-
     first_hex_data = requests.get(first_url_hex).json()
-
 
     r1 = first_hex_data['rgb']['r']
     g1 = first_hex_data['rgb']['g']
@@ -69,11 +66,8 @@ def colorCap():
         if(op1 == 1):
             b2 = b1 + val3
 
-
     rgb2 = str(r2) + "," + str(g2) + "," + str(b2)
     seccond_url_rgb = base_url_rgb + rgb2
-
-
 
     seccond_rgb_data = requests.get(seccond_url_rgb).json()
     hex_number2 = seccond_rgb_data['hex']['clean']
@@ -85,12 +79,9 @@ def colorCap():
 
     third_hex_data = requests.get(third_url_hex).json()
 
-
     r3 = third_hex_data['rgb']['r']
     g3 = third_hex_data['rgb']['g']
     b3 = third_hex_data['rgb']['b']
-
-
 
     order = random.randint(0,5)
 
@@ -156,37 +147,37 @@ def randoCap():
     def dont():
         array=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
         char=random.choice(array)
-        a=random.randint(1, 3)
+        a=random.randint(1, 2)
         if a==1:
-            print("Write anything With "+char)
-            b1=(input("first input with "+char+":")).lower()
-            b2=(input("second input with "+char+":")).lower()
-            b3=(input("thrid input with "+char+":")).lower()
+            print("Write anything with "+char)
+            b1=(input("First input with "+char+":")).lower()
+            b2=(input("Second input with "+char+":")).lower()
+            b3=(input("Third input with "+char+":")).lower()
             if (char in b1) and (char in b2) and (char in b3):
                 return True
             else:
                 return False
-        elif a==2:
-            print("Write anything Without "+char)
-            b1=(input("first input without "+char+":")).lower()
-            b2=(input("second input without "+char+":")).lower()
-            b3=(input("thrid input without "+char+":")).lower()
+        else:
+            print("Write anything without "+char)
+            b1=(input("First input without "+char+":")).lower()
+            b2=(input("Second input without "+char+":")).lower()
+            b3=(input("Third input without "+char+":")).lower()
             if (char not in b1) and (char not in b2) and (char not in b3):
                 return True
             else:
                 return False
-        else:
-            print("Don't do anything \n")
-            oOgabOoga, o, e=select.select([sys.stdin], [], [], 10)
-            if not oOgabOoga:
-                return True
-            else:
-                sys.stdin.readline().strip()
-                return False
+        # else:
+        #     print("Don't do anything \n")
+        #     oOgabOoga, o, e=select.select([sys.stdin], [], [], 10)
+        #     if not oOgabOoga:
+        #         return True
+        #     else:
+        #         sys.stdin.readline().strip()
+        #         return False
     return dont()
 
 def polyCap():
-    dimension=4
+    dimension=3
     def eachrow(piece, row):
         line=""
         for column in range(1,dimension+1):
@@ -268,9 +259,10 @@ def polyCap():
         moves =0
         while not current[0]==box[0]:
             os.system("cls")
+            print("Enter the numbers whose pieces do not overlap to fill a 3X3 grid.")
             print("Current")
             drawpieces(current)
-            print((len(pieces)*((dimension+1)*2+4)-3)*"_" + "\dimension")
+            print((len(pieces)*((dimension+1)*2+4)-3)*"_" + "\n")
             drawpieces(pieces)
             selection = 0
             attempt=current
@@ -339,7 +331,7 @@ def printFail():
     ⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⣿⣿⣶⣶⣶⣶⣿⣿⠿⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀""")
         print(ftext)
         if(ftext != "\t\tFAILURE"):
-            time.sleep(.2)
+            time.sleep(.1)
         else:
             time.sleep(1)
     tryText = "Let's try that again, shall we?"
@@ -372,7 +364,7 @@ def printSuccess():
     """)
         print(passText)
         if(passText != "\t    SUCCESS!"):
-            time.sleep(.2)
+            time.sleep(.1)
             os.system("cls")
         else:
             time.sleep(1)
@@ -409,7 +401,8 @@ while not passing:
     os.system("cls")
     os.system("color 07")
     i = randint(0,2)
-    print(tryText)
+    if(tryText != ""):
+        print(tryText)
     if fails == 3:
         detectBot()
     if i == 0:
